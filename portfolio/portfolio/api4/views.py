@@ -11,6 +11,57 @@ from .serializers import StudentSerializer
 from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework.mixins import (ListModelMixin, RetrieveModelMixin,
                                    CreateModelMixin, UpdateModelMixin, DestroyModelMixin)
+from rest_framework import viewsets
+
+class StudentViewSet(viewsets.ViewSet):
+    def list(self, request):
+        stu = Student.objects.all()
+        serializer = StudentSerializer(stu, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk = None):
+        id = pk
+        if id is not None:
+            stu = Student.objects.get(id = id)
+            serializer = StudentSerializer(stu)
+            return Response(serializer.data)
+
+    def create(self, request):
+        serializer= StudentSerializer(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg':'data saved in d.b'})
+        return Response(serializer.errors)
+    def update(self, request, pk):
+        id = pk
+        stu = Student.objects.get(pk = id)
+        serializer = StudentSerializer(stu,data = request.data )
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg":" complete updated"})
+        return Response(serializer.errors)
+    def partial_update(self,request, pk):
+        id = pk
+        stu = Student.objects.get(pk = id)
+        serializer = StudentSerializer(stu, data= request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg":"partial upate complete"})
+        return Response(serializer.errors)
+
+    def destroy(self, request, pk):
+        id = pk
+        stu = Student.objects.get(pk = id)
+        stu.delete()
+        return Response({'msg':"data delted"})
+
+
+
+
+
+
+
+
 
 
 class StudentListMixin(GenericAPIView, ListModelMixin):

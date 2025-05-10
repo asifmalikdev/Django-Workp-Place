@@ -1,7 +1,14 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import (StudentAPI, StudentListMixin, StudentCreateMixin,
-                    StudentUpdateView, StudentRetrieveMixin, StudentDeleteMixin, StudentCRUDView)
+                    StudentUpdateView, StudentRetrieveMixin, StudentDeleteMixin,
+                    StudentCRUDView, StudentViewSet)
+
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+
+
+router.register('StudentViewSet', views.StudentViewSet, basename="StudentViewSet")
 
 urlpatterns = [
 
@@ -16,5 +23,5 @@ urlpatterns = [
     path('StudentDeleteMixin/<int:pk>', StudentDeleteMixin.as_view(), name="StudentDeleteMixin" ),
     path('StudentCRUDView/', StudentCRUDView.as_view(), name="StudentCRUDView"),
     path('StudentCRUDView/<int:pk>', StudentCRUDView.as_view(), name="StudentCRUDView"),
-
+    path('', include(router.urls))
 ]
