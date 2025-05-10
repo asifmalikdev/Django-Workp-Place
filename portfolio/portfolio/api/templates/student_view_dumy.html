@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Student List</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Father Name</th>
+
+                </tr>
+            </thead>
+            <tbody id="student-table-body">
+                <!-- Table rows will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Parse the injected JSON data safely
+    const jsonData = JSON.parse('{{ json_data|safe }}');
+    const tableBody = document.getElementById('student-table-body');
+
+    jsonData.forEach(student => {
+        const row = `
+            <tr>
+                <td>${student.nam}</td>
+                <td>${student.fnam}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+</script>
+{% endblock %}

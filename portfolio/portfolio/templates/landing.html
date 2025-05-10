@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+<table class="table-responsive table table-bordered table-hover" >
+    <thead class="table-dark">
+    <tr>
+        <td>ID</td>
+        <td>USER NAME</td>
+        <td>EMAIL</td>
+        <td>PASSWORD</td>
+        <td>LAST LOGIN</td>
+        <td>SUPER USER</td>
+        <td>Is Staff</td>
+        <td>Is Active</td>
+        <td>Data Joined</td>
+    </tr>
+    </thead>
+{% for data in user %}
+    <tr>
+        <td>{{ data.id }}</td>
+        <td>{{ data.username }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.password }}</td>
+        <td>{{ data.last_login }}</td>
+        <td>{{ data.is_superuser }}</td>
+        <td>{{ data.is_staff }}</td>
+        <td>{{ data.is_active }}</td>
+        <td>{{ data.data_joined }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,9 @@
+<!-- contact.html -->
+<div class="container mt-5 mb-5" id="contact">
+    <h2>Contact Us</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
