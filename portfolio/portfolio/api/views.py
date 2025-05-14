@@ -4,7 +4,6 @@ from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from myapp import json_data
 from .models import Student as MyAppStudent, StudentDumy
 from .froms import StudentForm
 from .serializers import StudentSerialziser, StudentDummySerializer

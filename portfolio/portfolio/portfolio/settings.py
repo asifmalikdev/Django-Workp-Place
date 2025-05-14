@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #working from here
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
     #adding accounts to create signup and login page
     'accounts',

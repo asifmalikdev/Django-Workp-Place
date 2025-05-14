@@ -7,16 +7,32 @@ data = {
     "roll": 5762,
     "city": "bwp"
 }
-json_data = json.dumps(data)
+def function_call(data):
+    json_data = json.dumps(data)
 
-try:
-    r = requests.post(url=URL, data=json_data, headers={"Content-Type": "application/json"})
-    print("Status Code:", r.status_code)
-    print("Response Text:", r.text)
     try:
-        response_data = r.json()
-        print("JSON Response:", response_data)
-    except ValueError:
-        print("Response is not JSON.")
-except requests.exceptions.RequestException as e:
-    print("Request failed:", e)
+        r = requests.post(url=URL, data=json_data, headers={"Content-Type": "application/json"})
+        print("Status Code:", r.status_code)
+        print("Response Text:", r.text)
+        try:
+            response_data = r.json()
+            print("JSON Response:", response_data)
+        except ValueError:
+            print("Response is not JSON.")
+    except requests.exceptions.RequestException as e:
+        print("Request failed:", e)
+
+# function_call(data)
+
+
+
+
+
+
+
+
+
+
+
+
+

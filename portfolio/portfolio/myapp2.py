@@ -106,7 +106,7 @@ def delete_data():
     except requests.exceptions.RequestException as e:
         print('request failed', e)
 
-delete_data()
+# delete_data()
 
 
 URL = "http://127.0.0.1:8000/api/student_create/"

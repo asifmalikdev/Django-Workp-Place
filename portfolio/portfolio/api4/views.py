@@ -1,17 +1,24 @@
-from functools import partial
-
-from django.core.serializers import serialize
-from django.http import HttpResponse
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from .models import Student
 from .serializers import StudentSerializer
 from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework.mixins import (ListModelMixin, RetrieveModelMixin,
                                    CreateModelMixin, UpdateModelMixin, DestroyModelMixin)
 from rest_framework import viewsets
+
+
+class StudentModelViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
 
 class StudentViewSet(viewsets.ViewSet):
     def list(self, request):
