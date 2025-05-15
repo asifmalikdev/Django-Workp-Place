@@ -35,5 +35,6 @@ urlpatterns = [
     path('api3/', include("api3.urls")),
     path('crud/', include("crud.urls")),
     path('api4/', include("api4.urls")),
+    path('filters/', include("filters.urls")),
 ]
 

@@ -52,22 +52,35 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'filters',
+    'django_filters',
 
 
 ]
-
-REST_FRAMEWORK ={
-    'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',  # enables web login
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # requires login
+    ],
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #     'django_filters.rest_framework.DjangoFilterBackend',
+    # ],
 }
+
+# REST_FRAMEWORK ={
+#     'DEFAULT_AUTHENTICATION_CLASSES':(
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
+# }
 
 from datetime import timedelta
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS'
+    'ROTATE_REFRESH_TOKENS': True,
 }
 
 
