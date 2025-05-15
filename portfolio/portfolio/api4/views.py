@@ -1,3 +1,7 @@
+from functools import partial
+
+from django.contrib.staticfiles.views import serve
+from django.core.serializers import serialize
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
@@ -11,6 +15,15 @@ from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework.mixins import (ListModelMixin, RetrieveModelMixin,
                                    CreateModelMixin, UpdateModelMixin, DestroyModelMixin)
 from rest_framework import viewsets
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
+
+class StudentModelViewSetJWT(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
 
 
 class StudentModelViewSet(viewsets.ModelViewSet):
@@ -280,3 +293,51 @@ def student_api(request, pk=None):
             serializer.save()
             return Response({'msg': 'data patched succecfully'})
         return Response(serializer.errors)
+
+@api_view(['GET','POST','PUT','PATCH','DELETE'])
+def studentsapi(request, pk=None):
+    if request.method == 'GET':
+        id = pk
+        if id is not None:
+            try:
+                stu=Student.objects.get(pk=id)
+                serializer = StudentSerializer(stu)
+                return Response(serializer.data)
+            except Student.DoesNotExist:
+                return Response({"error":"student not found"})
+        else:
+            stu = Student.objcets.all()
+            serializer = StudentSerializer(stu, many=True)
+            return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = StudentSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Student saved'})
+        else:
+            return Response(serializer.errors)
+    elif request.method == 'PUT':
+        id = pk
+        stu = Student.objects.get(pk = id)
+        serializer = StudentSerializer(stu, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg":"student updated"})
+        else:
+            return Response(serializer.errors)
+    elif request.method == "PATCH":
+        id = pk
+        stu = Student.objects.get(pk = id)
+        serializer = StudentSerializer(stu, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg": "student saved"})
+        return Response(serializer.errors)
+    elif request.method == "DELETE":
+        try:
+            id = pk
+            stu = Student.objects.get(id = pk)
+            stu.delete()
+            return Response({"msg":"Student Deleted"})
+        except Student.DoesNotExist:
+            return Response({"msg":"studen does not exist"})

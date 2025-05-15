@@ -40,9 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #working from here
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_framework_simplejwt',
+
     #adding accounts to create signup and login page
     'accounts',
     'contactus',
@@ -50,7 +48,10 @@ INSTALLED_APPS = [
     'api2',
     'api3',
     'crud',
-    'api4'
+    'api4',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
 
 
 ]
@@ -66,6 +67,7 @@ from datetime import timedelta
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS'
 }
 
 
