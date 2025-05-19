@@ -17,7 +17,6 @@ from rest_framework.mixins import (ListModelMixin, RetrieveModelMixin,
 from rest_framework import viewsets
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-
 class StudentModelViewSetJWT(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

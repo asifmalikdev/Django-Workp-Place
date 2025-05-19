@@ -185,15 +185,3 @@ if __name__ == "__main__":
     print("Fetching all posts:")
     get_posts()
 
-import requests
-
-# NASA API endpoint for Astronomy Picture of the Day (APOD)
-url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
-
-response = requests.get(url)
-data = response.json()
-
-# Print the title and explanation of the image
-print("Title:", data["title"])
-print("Explanation:", data["explanation"])
-print("Image URL:", data["url"])
