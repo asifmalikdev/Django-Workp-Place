@@ -44,7 +44,7 @@ class Solution():
                 while i <len(left):
                     n[k]=left[i]
                     i+=1
-                    k+=2
+                    k+=1
             if j<len(right):
                 while j<len(right):
                     n[k]=right[j]
@@ -52,6 +52,15 @@ class Solution():
                     j+=1
         return n
 
+    def Swaping(self, lis, i , j):
+        if i>= j:
+            return 0
+        temp = lis[j]
+        lis[j]=lis[i]
+        lis[i]=temp
+        i+=1
+        j-=1
+        self.Swaping(lis, i, j)
 
 
 obj = Solution()
@@ -59,4 +68,35 @@ obj = Solution()
 # print(obj.factoral(6))
 # obj.nameprint(5)
 # obj.oneton(5)
-print(obj.mergesort([3,2,4,5,3,34,56,6,3,2,323]))
+print(obj.mergesort([3,2,4,5,3,34,56,6,3,2,323,2,4,5,3,34,56,6,3,2,323,2,4,5,3,34,56,6,3,2,323,2,4,5,3,34,56,6,3,2,323,2,4,5,3,34,56,6,3,2,323]))
+# lis = [2,3,4,5,6,7]
+# obj.Swaping(lis, 0, len(lis)-1)
+# print(lis)
+
+
+def swaping(lis):
+    i,j=0,len(lis)-1
+    print("list 1",lis)
+    while i<j:
+        lis[i],lis[j]=lis[j],lis[i]
+        i+=1
+        j-=1
+    return lis
+lis1 = [1,2,3,4,3,2,1,2]
+lis2 = swaping(lis1)
+print("list 2:",lis2)
+if lis1==lis2:
+    print("it is palindrome")
+else:
+    print("not palindrome")
+
+# lis = [2,4,1]
+# swaping(lis)
+# print(lis)
+# x=3
+# y=4
+# lis.append()
+lis3 = [1,2,3,4,3,2,1,2]
+lis4 = [2,1,2,3,4,3,2,1]
+if lis3==lis4:
+    print("this one tooo")
