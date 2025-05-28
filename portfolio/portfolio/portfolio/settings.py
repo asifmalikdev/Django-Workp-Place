@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'filters',
     'django_filters',
     'relationships',
-    'students'
+    'students',
+    'forms'
 
 
 ]
