@@ -102,15 +102,23 @@
 #     print("this one tooo")
 
 class Solution(object):
-    def isPalindrome(self, s):
-        s2=[]
-        s1=[]
-        for char in s:
-            if char.isalnum():
-                c = char.lower()
-                s1.append(c)
-        return "".join(s1) == "".join(s1)[::-1]
+    # def isPalindrome(self, s):
+    #     s2=[]
+    #     s1=[]
+    #     for char in s:
+    #         if char.isalnum():
+    #             c = char.lower()
+    #             s1.append(c)
+    #     return "".join(s1) == "".join(s1)[::-1]
+    def singleNumber(self, nums):
+        result = 0
+        for num in nums:
+            result ^= num
+            print(num, "hello", result)
+        return result
+
 
 
 obj = Solution()
-print(obj.isPalindrome("r909r"))
+# print(obj.isPalindrome("r909r"))
+print(obj.singleNumber([4,1,2,1,2,4,5]))
