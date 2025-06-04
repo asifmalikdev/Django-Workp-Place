@@ -115,6 +115,7 @@ class Solution(object):
         for num in nums:
             result ^= num
             print(num, "hello", result)
+            print("hello asif")
         return result
 
 
