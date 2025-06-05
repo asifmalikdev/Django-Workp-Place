@@ -100,6 +100,8 @@
 # lis4 = [2,1,2,3,4,3,2,1]
 # if lis3==lis4:
 #     print("this one tooo")
+from numpy.ma.extras import average
+
 
 class Solution(object):
     # def isPalindrome(self, s):
@@ -119,7 +121,78 @@ class Solution(object):
         return result
 
 
+#
+# obj = Solution()
+# # print(obj.isPalindrome("r909r"))
+# print(obj.singleNumber([4,1,2,1,2,4,5]))
 
-obj = Solution()
-# print(obj.isPalindrome("r909r"))
-print(obj.singleNumber([4,1,2,1,2,4,5]))
+
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+        print("in constructo", self._radius)
+
+    @property
+    def radius(self):
+        print("inn radius getter", self._radius)
+        return self._radius
+
+    @radius.setter
+    def radius(self, value):
+        print("in setter", value)
+        if value < 0:
+            raise ValueError("Radius cannot be negative")
+        self._radius = value
+
+    @property
+    def area(self):
+        print("area getter", self._radius)
+        return 3.14159 * self._radius ** 2
+
+# Usage
+# circle = Circle(5)
+# print(circle.radius)  # Accessing radius via getter
+# print(circle.area) # Accessing area via getter
+# circle.radius = 7 # Setting radius via setter
+# print(circle.radius)  # Accessing radius via getter
+#
+# print(circle.area) # Accessing area via getter
+
+
+
+class Student():
+    def __init__(self, name, roll_no, marks):
+        self.name = name
+        self.roll_no = roll_no
+        self.marks  = marks
+
+    @property
+    def total_marks_getter(self):
+        return sum(self.marks)
+
+    @property
+    def average_getter(self):
+        return average(self.marks)
+
+    @property
+    def grade_getter(self):
+        avg = self.average_getter
+        if avg>50:
+            return "Pass"
+        else:
+            return "fails"
+
+    def __str__(self):
+        return (
+            f"Name : {self.name}, Roll No: {self.roll_no}"
+            f"Total : {self.total_marks_getter}\n"
+            f"Avg : {self.average_getter}\n"
+            f"Grade : {self.grade_getter}"
+        )
+
+
+
+
+
+student1 = Student("Axif Malik", "CS101", [85, 90, 78, 92, 88])
+print(student1)
